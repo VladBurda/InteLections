@@ -1,80 +1,66 @@
-########################################################################################
-!!!!!!!!!!!!!!!!!!!Wersja koncowa nie jest realizowana->Readme.txt!!!!!!!!!!!!!!!!!!!!!!
-########################################################################################
+!!!Wersja robocza!!!
 
+InteLections
+============
 
+InteLections – system zarządzania mikrolekcjami z testami dla uczniów i nauczycieli.  
+Projekt jest w trakcie realizacji w ramach pracy dyplomowej na kierunku Informatyka – Programowanie.  
+Obecnie zaimplementowana została część interfejsu użytkownika (frontend).
 
+------------------------------------------------------
+Funkcjonalności dostępne w obecnej wersji
+------------------------------------------------------
+- Widoki interfejsu: Home Page, Discover Page, My Products, Profile, Groups & Classes.
+- Podstawowa nawigacja pomiędzy stronami.
+- Komponenty kursów (Course Cards).
+- Prosty układ strony z sidebar i AppShell.
 
-# React + TypeScript + Vite
+------------------------------------------------------
+Technologie
+------------------------------------------------------
+Frontend: React + TypeScript, Vite, Tailwind CSS  
+Menadżer pakietów: npm (Node.js)  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+------------------------------------------------------
+Wymagania
+------------------------------------------------------
+- Node.js v18+  
+- npm (instalowany razem z Node.js)  
 
-Currently, two official plugins are available:
+------------------------------------------------------
+Instrukcja uruchomienia interfejsu
+------------------------------------------------------
+1. Otwórz terminal i przejdź do katalogu frontend projektu:
+   cd frontend
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+2. Zainstaluj zależności:
+   npm install
 
-## React Compiler
+3. Uruchom aplikację w trybie developerskim:
+   npm run dev
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+4. Po uruchomieniu aplikacja będzie dostępna pod adresem:
+   http://localhost:5173
 
-## Expanding the ESLint configuration
+------------------------------------------------------
+Struktura projektu (aktualna część frontendowa)
+------------------------------------------------------
+frontend/
+│── src/                # pliki źródłowe interfejsu
+│   ├── pages/          # widoki (Home, Discover, My Products, Profile)
+│   ├── components/     # komponenty wielokrotnego użytku (CourseCard, Sidebar itp.)
+│   └── layouts/        # układy stron (AppShell)
+│
+│── public/             # pliki statyczne
+│── package.json        # konfiguracja npm
+│── vite.config.ts      # konfiguracja Vite
+│── README.txt          # niniejszy plik
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+------------------------------------------------------
+Informacje dodatkowe
+------------------------------------------------------
+Projekt jest rozwijany etapami – obecnie gotowa jest część interfejsu.  
+Backend (Flask/Python) będzie implementowany w kolejnych etapach.  
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Autor: Vladyslav Burda  
+Wyższa Szkoła Informatyki i Zarządzania w Rzeszowie (WSIiZ)
