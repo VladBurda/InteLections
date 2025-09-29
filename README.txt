@@ -30,8 +30,8 @@ Wymagania
 ------------------------------------------------------
 Instrukcja uruchomienia interfejsu
 ------------------------------------------------------
-1. Otwórz terminal i przejdź do katalogu frontend projektu:
-   cd frontend
+1. Otwórz terminal i przejdź do katalogu InteLections projektu:
+   cd InteLections
 
 2. Zainstaluj zależności:
    npm install
@@ -45,7 +45,7 @@ Instrukcja uruchomienia interfejsu
 ------------------------------------------------------
 Struktura projektu (aktualna część frontendowa)
 ------------------------------------------------------
-frontend/
+InteLections/
 │── src/                # pliki źródłowe interfejsu
 │   ├── pages/          # widoki (Home, Discover, My Products, Profile)
 │   ├── components/     # komponenty wielokrotnego użytku (CourseCard, Sidebar itp.)
