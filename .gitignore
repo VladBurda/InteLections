@@ -22,3 +22,30 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local database
+backend/data/*.db
+
+# Uploaded avatars
+backend/uploads/avatars/*
+!backend/uploads/avatars/.gitkeep
+backend/uploads/course-covers/*
+!backend/uploads/course-covers/.gitkeep
+backend/uploads/materials/*
+!backend/uploads/materials/.gitkeep
+backend/data/*
+
+backend/uploads/learner-materials/*
+!backend/uploads/learner-materials/.gitkeep
+
+
+# Local environment
+.env
+.env.local
+.env.*.local
+
+coverage
+.vite
+Thumbs.db
+
+

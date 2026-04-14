@@ -1,66 +1,113 @@
-!!!Wersja robocza!!!
-
 InteLections
-============
 
-InteLections – system zarządzania mikrolekcjami z testami dla uczniów i nauczycieli.  
-Projekt jest w trakcie realizacji w ramach pracy dyplomowej na kierunku Informatyka – Programowanie.  
-Obecnie zaimplementowana została część interfejsu użytkownika (frontend).
+What InteLections can do
 
-------------------------------------------------------
-Funkcjonalności dostępne w obecnej wersji
-------------------------------------------------------
-- Widoki interfejsu: Home Page, Discover Page, My Products, Profile, Groups & Classes.
-- Podstawowa nawigacja pomiędzy stronami.
-- Komponenty kursów (Course Cards).
-- Prosty układ strony z sidebar i AppShell.
+At this stage, the project includes a set of features:
 
-------------------------------------------------------
-Technologie
-------------------------------------------------------
-Frontend: React + TypeScript, Vite, Tailwind CSS  
-Menadżer pakietów: npm (Node.js)  
+user registration and login
+Google OAuth login
+profile editing
+course creation and publishing
+lesson creation
+folders and lesson materials
+hosted video, audio, documents, and YouTube embeds
+lesson quizzes with multiple question types
+AI-assisted quiz draft generation
+groups and classes for teacher-student collaboration
+subscriptions and paid courses
+Stripe Checkout and Stripe Connect integration
+Main idea behind the project
 
-------------------------------------------------------
-Wymagania
-------------------------------------------------------
-- Node.js v18+  
-- npm (instalowany razem z Node.js)  
+The project was built around the idea that learning content should be more than just a collection of uploaded files. 
+In InteLections, content is organized into lessons, materials, quizzes, and class-related actions, so the platform can 
+be used both by someone learning alone and by someone working inside a teacher-managed class.
 
-------------------------------------------------------
-Instrukcja uruchomienia interfejsu
-------------------------------------------------------
-1. Otwórz terminal i przejdź do katalogu InteLections projektu:
-   cd InteLections
+Another important part of the project is the authoring side. A course creator can prepare content step by step, 
+upload materials, organize them into folders, build quizzes manually, or use OpenAI to generate an editable quiz draft. 
+Paid courses and seller onboarding were added to show how the platform could also grow into a small educational marketplace.
 
-2. Zainstaluj zależności:
-   npm install
+Roles in the system
 
-3. Uruchom aplikację w trybie developerskim:
-   npm run dev
+The application supports several user roles, each with a slightly different experience:
 
-4. Po uruchomieniu aplikacja będzie dostępna pod adresem:
-   http://localhost:5173
+Student — joins classes, opens assigned courses, solves quizzes, and follows learning materials
+Teacher — creates classes, assigns courses, invites students, and reviews activity and progress
+Personal — focuses on creating and publishing content without the classroom workflow
+Admin — moderates selected actions and provides platform-level control
 
-------------------------------------------------------
-Struktura projektu (aktualna część frontendowa)
-------------------------------------------------------
-InteLections/
-│── src/                # pliki źródłowe interfejsu
-│   ├── pages/          # widoki (Home, Discover, My Products, Profile)
-│   ├── components/     # komponenty wielokrotnego użytku (CourseCard, Sidebar itp.)
-│   └── layouts/        # układy stron (AppShell)
-│
-│── public/             # pliki statyczne
-│── package.json        # konfiguracja npm
-│── vite.config.ts      # konfiguracja Vite
-│── README.txt          # niniejszy plik
+Running the project locally:
+Requirements
+Node.js 20+
+npm
+Install and start
+npm install
+npm run dev
+Default local addresses
+frontend: http://localhost:5173
+backend: http://localhost:4000
+Environment configuration
 
-------------------------------------------------------
-Informacje dodatkowe
-------------------------------------------------------
-Projekt jest rozwijany etapami – obecnie gotowa jest część interfejsu.  
-Backend (Flask/Python) będzie implementowany w kolejnych etapach.  
+The project reads local configuration from .env. An example file is included as .env.example.
 
-Autor: Vladyslav Burda  
-Wyższa Szkoła Informatyki i Zarządzania w Rzeszowie (WSIiZ)
+Important variables:
+
+OPENAI_API_KEY=
+OPENAI_QUIZ_MODEL=gpt-5-mini
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+STRIPE_INTELECTIONS_PLUS_PRICE_ID=
+STRIPE_CONNECT_RETURN_URL=http://localhost:5173/account?connect=return
+STRIPE_CONNECT_REFRESH_URL=http://localhost:5173/account?connect=refresh
+STRIPE_PLATFORM_APPLICATION_FEE_PERCENT=1
+DEFAULT_DEMO_PASSWORD=Intelections123!
+Demo accounts
+
+The local seeded accounts use the default demo password unless it was changed in the database.
+
+Teacher / author: jan@example.com
+Student: vlad@example.com
+Admin: admin@intelections.local
+default password: Intelections123!
+AI support
+
+Quiz generation is handled on the backend through the OpenAI API.
+
+A few important notes:
+
+AI generates an editable draft only
+nothing is saved automatically
+quizzes can always be created manually without AI
+
+This approach was chosen so that AI helps with authoring, but the final version of the quiz still stays under user control.
+
+Payments
+
+The payment layer currently includes:
+
+InteLections+ subscription flow
+one-time checkout for paid courses
+seller onboarding through Stripe Connect
+a 1% platform fee for paid course purchases
+
+For local testing, Stripe should be used in test mode.
+
+Validation
+
+Useful commands before handing over the project or making bigger changes:
+
+node --check backend/server.mjs
+node --check backend/db.mjs
+npx tsc -b
+npm run lint
+npm test
+
+Current limitations:
+
+InteLections is still a thesis project and not a fully production-ready platform yet.
+
+Some current limitations are:
+
+test coverage is still lighter than in a mature production system
+password reset works locally and does not send real emails
+Stripe and OpenAI features depend on local configuration and test setup
+billing history and marketplace functionality are not expanded fully yet

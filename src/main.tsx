@@ -9,8 +9,15 @@ import MyProductsPage from './pages/MyProductsPage'
 import AccountPage from './pages/AccountPage'
 import AboutPage from './pages/AboutPage'
 import CourseDetailsPage from './pages/CourseDetailsPage'
+import LoginPage from './pages/LoginPage'
+import ResetPasswordPage from './pages/ResetPasswordPage'
+import ProfileViewPage from './pages/ProfileViewPage'
+import GroupsClassesPage from './pages/GroupsClassesPage'
+import ClassDetailPage from './pages/ClassDetailPage'
 
 const router = createBrowserRouter([
+  { path: '/login', element: <LoginPage /> },
+  { path: '/reset-password', element: <ResetPasswordPage /> },
   {
     path: '/',
     element: <App />,
@@ -18,13 +25,12 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: 'discover', element: <DiscoverPage /> },
       { path: 'my-products', element: <MyProductsPage />},
+      { path: 'groups-classes', element: <GroupsClassesPage /> },
+      { path: 'groups-classes/:classId', element: <ClassDetailPage /> },
       { path: 'account', element: <AccountPage /> },
+      { path: 'profile/:id', element: <ProfileViewPage /> },
       { path: 'about', element: <AboutPage /> },
       { path: 'course/:id', element: <CourseDetailsPage /> },
-      // przyszłe strony:
-      // { path: 'discover', element: <DiscoverPage /> },
-      // { path: 'my-products', element: <MyProductsPage /> },
-      // itd.
     ],
   },
 ])

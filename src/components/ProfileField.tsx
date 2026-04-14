@@ -9,7 +9,7 @@ export default function ProfileField({
   placeholder?: string;
 }) {
   return (
-    <label className="grid gap-1">
+    <label className="grid self-start gap-1">
       <span className="text-sm text-neutral-600">{label}</span>
       {editable ? (
         <input
@@ -17,11 +17,12 @@ export default function ProfileField({
           value={value ?? ''}
           placeholder={placeholder}
           onChange={e => onChange?.(e.target.value)}
-          className="rounded-lg border px-3 py-2"
+          className="min-h-[54px] rounded-[24px] border border-neutral-200 bg-white px-4 py-3 leading-6"
         />
       ) : (
-        <div className="rounded-lg border px-3 py-2 bg-white">{value || '—'}</div>
+        <div className="flex min-h-[54px] items-center rounded-[24px] border border-neutral-200 bg-white px-4 py-3 leading-6 text-neutral-800">{value || '-'}</div>
       )}
     </label>
   );
 }
+
