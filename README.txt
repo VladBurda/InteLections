@@ -39,9 +39,11 @@ Running the project locally:
 Requirements
 Node.js 20+
 npm
+
 Install and start
 npm install
 npm run dev
+
 Default local addresses
 frontend: http://localhost:5173
 backend: http://localhost:4000
@@ -59,47 +61,33 @@ STRIPE_INTELECTIONS_PLUS_PRICE_ID=
 STRIPE_CONNECT_RETURN_URL=http://localhost:5173/account?connect=return
 STRIPE_CONNECT_REFRESH_URL=http://localhost:5173/account?connect=refresh
 STRIPE_PLATFORM_APPLICATION_FEE_PERCENT=1
+
 DEFAULT_DEMO_PASSWORD=Intelections123!
 Demo accounts
-
-The local seeded accounts use the default demo password unless it was changed in the database.
 
 Teacher / author: jan@example.com
 Student: vlad@example.com
 Admin: admin@intelections.local
 default password: Intelections123!
+
 AI support
 
 Quiz generation is handled on the backend through the OpenAI API.
-
 A few important notes:
-
 AI generates an editable draft only
 nothing is saved automatically
 quizzes can always be created manually without AI
 
-This approach was chosen so that AI helps with authoring, but the final version of the quiz still stays under user control.
-
 Payments
 
 The payment layer currently includes:
-
 InteLections+ subscription flow
 one-time checkout for paid courses
 seller onboarding through Stripe Connect
 a 1% platform fee for paid course purchases
-
 For local testing, Stripe should be used in test mode.
 
 Validation
-
-Useful commands before handing over the project or making bigger changes:
-
-node --check backend/server.mjs
-node --check backend/db.mjs
-npx tsc -b
-npm run lint
-npm test
 
 Current limitations:
 

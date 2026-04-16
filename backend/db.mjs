@@ -60,19 +60,19 @@ function seedIfEmpty(db) {
   db.exec(`
     INSERT INTO users (id, email, first_name, last_name, role, bio, location, birth_date, avatar_url) VALUES
       ('u-1', 'vlad@example.com', 'Vlad', 'Surname', 'Student', 'History enthusiast. Learning daily.', 'Rzeszow, PL', '2004-03-10', ''),
-      ('u-2', 'anna@example.com', 'Anna', 'Kowalska', 'Teacher', 'Passionate about world history.', 'Warsaw, PL', '1988-07-14', ''),
-      ('u-3', 'jan@example.com', 'Jan', 'Nowak', 'Teacher', 'Ancient world researcher.', 'Krakow, PL', '1982-02-02', '');
+      ('u-3', 'jan@example.com', 'Jan', 'Nowak', 'Teacher', 'Ancient world researcher.', 'Krakow, PL', '1982-02-02', ''),
+      ('u-10', 'tomasz@example.com', 'Tomasz', 'Baran', 'Personal', 'Humanities creator building compact literature and ethics paths.', 'Opole, PL', '1993-08-09', '');
 
     INSERT INTO courses (
       id, title, description, author_user_id, category, level, publish_status, visibility, access_type,
       price_cents, currency, country, is_trending, is_popular_pl
     ) VALUES
-      ('world-history-18c', 'World History: 18th Century', 'Key events shaping the 18th century world.', 'u-2', 'History', 'intermediate', 'published', 'public', 'free', NULL, NULL, 'PL', 1, 1),
+      ('world-history-18c', 'World History: 18th Century', 'Key events shaping the 18th century world.', 'u-3', 'History', 'intermediate', 'published', 'public', 'free', NULL, NULL, 'PL', 1, 1),
       ('ancient-civ', 'Ancient Civilizations', 'Introduction to Mesopotamia, Egypt, Greece and Rome.', 'u-3', 'History', 'beginner', 'published', 'public', 'free', NULL, NULL, 'PL', 1, 1),
-      ('modern-europe-1900-1945', 'Modern Europe 1900-1945', 'Overview of Europe in the first half of the 20th century.', 'u-2', 'History', 'intermediate', 'draft', 'private', 'free', NULL, NULL, 'PL', 0, 0),
-      ('renaissance-art', 'Renaissance Art', 'Art movements and iconic works of the Renaissance period.', 'u-2', 'Art', 'beginner', 'published', 'public', 'paid', 2999, 'PLN', 'PL', 1, 0),
-      ('intro-philosophy', 'Intro to Philosophy', 'Main schools of thought and key philosophers.', 'u-3', 'Humanities', 'beginner', 'published', 'public', 'free', NULL, NULL, 'PL', 1, 0),
-      ('geography-poland', 'Geography of Poland', 'Regions, climate and natural resources of Poland.', 'u-2', 'Geography', 'beginner', 'published', 'public', 'free', NULL, NULL, 'PL', 0, 1);
+      ('modern-europe-1900-1945', 'Modern Europe 1900-1945', 'Overview of Europe in the first half of the 20th century.', 'u-3', 'History', 'intermediate', 'draft', 'private', 'free', NULL, NULL, 'PL', 0, 0),
+      ('renaissance-art', 'Renaissance Art', 'Art movements and iconic works of the Renaissance period.', 'u-10', 'Art', 'beginner', 'published', 'public', 'paid', 2999, 'PLN', 'PL', 1, 0),
+      ('intro-philosophy', 'Intro to Philosophy', 'Main schools of thought and key philosophers.', 'u-10', 'Humanities', 'beginner', 'published', 'public', 'free', NULL, NULL, 'PL', 1, 0),
+      ('geography-poland', 'Geography of Poland', 'Regions, climate and natural resources of Poland.', 'u-3', 'Geography', 'beginner', 'published', 'public', 'free', NULL, NULL, 'PL', 0, 1);
 
     INSERT INTO course_stats (course_id, students, rating, reviews) VALUES
       ('world-history-18c', 920, 4.6, 132),
@@ -103,31 +103,6 @@ function seedIfEmpty(db) {
 function backfillAuthorProfiles(db) {
   const authorProfiles = [
     {
-      userId: 'u-2',
-      headline: 'Teacher of modern history, art culture and accessible microlearning',
-      website: 'https://intelections.local/anna',
-      institution: 'University of Warsaw',
-      specialization: 'History Education',
-      bio: 'I design short, focused history lessons that help students understand difficult topics without getting lost in unnecessary theory. My work combines classroom practice, visual storytelling and digital teaching methods.',
-      location: 'Warsaw, PL',
-      achievements: [
-        ['ach-profile-u2-1', 'Top-rated history mentor', 'InteLections', '2025', 1],
-        ['ach-profile-u2-2', 'Published a multidisciplinary humanities catalog', 'InteLections', '2024-2025', 2],
-      ],
-      certificates: [
-        ['cert-profile-u2-1', 'Teaching with Digital Tools', 'Coursera', '2024', 'https://example.com/cert/anna-digital-tools', 1],
-        ['cert-profile-u2-2', 'Instructional Design Foundations', 'Google', '2023', 'https://example.com/cert/anna-instructional-design', 2],
-      ],
-      activities: [
-        ['act-profile-u2-1', 'Mentor in history olympiad prep', 'Warsaw Academic Club', 'Prepared students for national-level competitions and ran weekly workshops.', '2024-now', 1],
-        ['act-profile-u2-2', 'Panel host', 'Education and Future Summit', 'Hosted a discussion about accessible microlearning for secondary students.', '2025', 2],
-      ],
-      socials: [
-        ['social-profile-u2-1', 'instagram', 'https://instagram.com/annakowalska.edu', 1],
-        ['social-profile-u2-2', 'linkedin', 'https://linkedin.com/in/annakowalska-edu', 2],
-      ],
-    },
-    {
       userId: 'u-3',
       headline: 'Researcher in ancient civilizations and author of intro humanities courses',
       website: 'https://intelections.local/jan',
@@ -152,24 +127,24 @@ function backfillAuthorProfiles(db) {
       ],
     },
     {
-      userId: 'u-d6dac620-4bf6-4598-83fa-9feb637e57e7',
-      headline: 'Practical course creator focused on programming fundamentals',
-      website: 'https://intelections.local/session-test',
-      institution: 'WSIZ University',
-      specialization: 'Programming',
-      bio: 'I build compact, practical learning materials for people who want fast progress and a clean structure. My profile is centered around straightforward explanations, examples and incremental course design.',
-      location: 'Rzeszow, PL',
+      userId: 'u-10',
+      headline: 'Humanities creator focused on literature, ethics and close reading',
+      website: 'https://intelections.local/tomasz',
+      institution: 'Independent Creator',
+      specialization: 'Humanities and Interpretation',
+      bio: 'I create compact humanities courses that help learners work with symbols, moral dilemmas and careful interpretation of texts without academic overload.',
+      location: 'Opole, PL',
       achievements: [
-        ['ach-profile-usession-1', 'Created hands-on programming drafts', 'InteLections', '2025', 1],
+        ['ach-profile-u10-1', 'Built compact humanities learning paths', 'InteLections', '2025', 1],
       ],
       certificates: [
-        ['cert-profile-usession-1', 'Programming Foundations', 'Open Learning Lab', '2024', 'https://example.com/cert/session-programming', 1],
+        ['cert-profile-u10-1', 'Literary Interpretation Essentials', 'Open Learning Lab', '2024', 'https://example.com/cert/tomasz-literature', 1],
       ],
       activities: [
-        ['act-profile-usession-1', 'Peer workshop organizer', 'Student Tech Circle', 'Organized short practical sessions for beginner programmers.', '2025', 1],
+        ['act-profile-u10-1', 'Reading workshop organizer', 'Local Humanities Circle', 'Led short discussion-based sessions on symbols, motifs and ethical interpretation.', '2025', 1],
       ],
       socials: [
-        ['social-profile-usession-1', 'linkedin', 'https://linkedin.com/in/session-test-profile', 1],
+        ['social-profile-u10-1', 'linkedin', 'https://linkedin.com/in/tomasz-baran-humanities', 1],
       ],
     },
   ];
@@ -252,7 +227,7 @@ function backfillLearningGroups(db) {
   const count = Number(db.prepare('SELECT COUNT(*) AS count FROM learning_groups').get().count || 0);
   if (count > 0) return;
 
-  const requiredUsers = ['u-1', 'u-2', 'u-3'];
+  const requiredUsers = ['u-1', 'u-3'];
   const missingUser = requiredUsers.some(userId => !db.prepare('SELECT 1 FROM users WHERE id = ?').get(userId));
   if (missingUser) return;
 
@@ -260,16 +235,6 @@ function backfillLearningGroups(db) {
     INSERT INTO learning_groups (
       id, owner_user_id, name, description, focus_area, meeting_label, location_label, invite_code
     ) VALUES
-      (
-        'group-history-lab',
-        'u-2',
-        'History Lab - Semester Group',
-        'A teacher-led class for weekly topic reviews, short assessments and feedback on public history courses.',
-        'Modern History',
-        'Tue 18:00 / Thu 17:30',
-        'Room A-204 + online notes',
-        'HIST-LAB-24'
-      ),
       (
         'group-ancient-seminar',
         'u-3',
@@ -282,30 +247,12 @@ function backfillLearningGroups(db) {
       );
 
     INSERT INTO learning_group_members (group_id, user_id, member_role, status) VALUES
-      ('group-history-lab', 'u-2', 'teacher', 'active'),
-      ('group-history-lab', 'u-1', 'student', 'active'),
       ('group-ancient-seminar', 'u-3', 'teacher', 'active'),
       ('group-ancient-seminar', 'u-1', 'student', 'active');
 
     INSERT INTO group_course_assignments (
       id, group_id, course_id, assigned_by_user_id, cadence_label, due_label
     ) VALUES
-      (
-        'assignment-history-lab-world-history',
-        'group-history-lab',
-        'world-history-18c',
-        'u-2',
-        'Weekly checkpoints',
-        'Module review every Sunday'
-      ),
-      (
-        'assignment-history-lab-modern-europe',
-        'group-history-lab',
-        'modern-europe-1900-1945',
-        'u-2',
-        'Private preparation track',
-        'Unlock after first checkpoint'
-      ),
       (
         'assignment-ancient-seminar-civ',
         'group-ancient-seminar',
@@ -401,47 +348,37 @@ function ensureBackfillMaterialFile(fileName, contents) {
   };
 }
 
-function backfillClassicalGreeceMaterials(db) {
+function backfillAncientEgyptMaterials(db) {
+  db.prepare('DELETE FROM lesson_materials WHERE lesson_id = ?').run('l4');
+  db.prepare('DELETE FROM lesson_material_sections WHERE lesson_id = ?').run('l4');
+
   const lesson = db.prepare(`
     SELECT l.id, c.author_user_id AS authorUserId
     FROM lessons l
     JOIN courses c ON c.id = l.course_id
-    WHERE l.id = 'l4'
+    WHERE l.id = 'l3'
   `).get();
 
   if (!lesson || lesson.authorUserId !== 'u-3') return;
 
-  const materialCount = db.prepare('SELECT COUNT(*) AS count FROM lesson_materials WHERE lesson_id = ?').get('l4');
+  const materialCount = db.prepare('SELECT COUNT(*) AS count FROM lesson_materials WHERE lesson_id = ?').get('l3');
   if (Number(materialCount?.count || 0) > 0) return;
 
   db.prepare(`
     INSERT OR IGNORE INTO lesson_material_sections (id, lesson_id, title, description, sort_order)
     VALUES
-      ('sec-greece-polis', 'l4', 'Polis foundations', 'What made the Greek polis a distinctive political and social model.', 1),
-      ('sec-greece-culture', 'l4', 'Culture and civic life', 'Shared beliefs, theatre, education and everyday participation in the city-state.', 2)
+      ('sec-egypt-kingdoms', 'l3', 'Kingdoms and chronology', 'The main periods of ancient Egyptian history and their order.', 1)
   `).run();
 
-  const polisNotes = ensureBackfillMaterialFile(
-    'classical-greece-polis-notes.txt',
+  const kingdomsNotes = ensureBackfillMaterialFile(
+    'ancient-egypt-kingdoms-notes.txt',
     [
-      'Classical Greece - Polis and Culture',
+      'Ancient Egypt - Kingdoms and Pharaohs',
       '',
       'Key reminders:',
-      '- The polis was an independent city-state, not one united empire.',
-      '- Citizens were expected to participate in political and military life.',
-      '- Athens and Sparta were both poleis, but they valued different civic ideals.',
-    ].join('\n'),
-  );
-
-  const cultureNotes = ensureBackfillMaterialFile(
-    'classical-greece-culture-theatre.txt',
-    [
-      'Culture in the Greek polis',
-      '',
-      'Themes worth noticing:',
-      '- Public festivals honoured the gods and strengthened civic identity.',
-      '- Theatre in Athens combined religion, politics and education.',
-      '- Education, rhetoric and debate shaped how citizens understood public life.',
+      '- The Old Kingdom came first, followed by the Middle and New Kingdom.',
+      '- The Nile made agriculture and long-term state organization possible.',
+      '- Political stability changed across periods, but the pharaoh remained the symbolic center of the state.',
     ].join('\n'),
   );
 
@@ -449,27 +386,14 @@ function backfillClassicalGreeceMaterials(db) {
     INSERT OR IGNORE INTO lesson_materials (
       id, lesson_id, title, material_kind, file_path, original_name, description, mime_type, file_size_bytes, external_url, section_id, sort_order
     ) VALUES
-      (?, 'l4', ?, 'document', ?, ?, ?, 'text/plain', ?, '', 'sec-greece-polis', 1),
-      (?, 'l4', ?, 'document', ?, ?, ?, 'text/plain', ?, '', 'sec-greece-culture', 2),
-      (?, 'l4', ?, 'youtube', ?, 'YouTube video', ?, 'text/uri-list', 0, ?, 'sec-greece-culture', 3)
+      (?, 'l3', ?, 'document', ?, ?, ?, 'text/plain', ?, '', 'sec-egypt-kingdoms', 1)
   `).run(
-    'mat-greece-polis-notes',
-    'Polis foundations - assembly, citizenship and autonomy',
-    polisNotes.publicPath,
-    'classical-greece-polis-notes.txt',
-    'Explains what made the polis independent, why citizenship mattered, and how participation in the assembly shaped political life in classical Greece.',
-    Buffer.byteLength(fs.readFileSync(polisNotes.absolutePath, 'utf8')),
-    'mat-greece-culture-notes',
-    'Culture and civic identity - theatre, festivals and debate',
-    cultureNotes.publicPath,
-    'classical-greece-culture-theatre.txt',
-    'Summarises how religion, theatre, public festivals and rhetoric supported shared identity inside the polis, especially in Athens.',
-    Buffer.byteLength(fs.readFileSync(cultureNotes.absolutePath, 'utf8')),
-    'mat-greece-youtube-overview',
-    'Classical Greece overview - polis and culture',
-    'https://www.youtube.com/embed/O4A0Z9w9LwQ?rel=0',
-    'A short visual recap linking civic identity, the assembly, festivals and the contrast between major Greek poleis.',
-    'https://www.youtube.com/watch?v=O4A0Z9w9LwQ'
+    'mat-egypt-kingdoms-notes',
+    'Egyptian kingdoms - timeline and structure',
+    kingdomsNotes.publicPath,
+    'ancient-egypt-kingdoms-notes.txt',
+    'Summarises the Old, Middle and New Kingdoms, explains their order and highlights the role of the Nile in state continuity.',
+    Buffer.byteLength(fs.readFileSync(kingdomsNotes.absolutePath, 'utf8'))
   );
 }
 function backfillDefenseDemoAccounts(db) {
@@ -484,103 +408,6 @@ function backfillDefenseDemoAccounts(db) {
         last_name = ''
     WHERE id = 'u-admin-demo' OR lower(email) = 'admin@intelections.local'
   `).run();
-}
-
-function backfillDiscoverShowcase(db) {
-  db.exec(`
-    INSERT OR IGNORE INTO users (id, email, first_name, last_name, role, bio, location, birth_date, avatar_url) VALUES
-      ('u-4', 'marta@example.com', 'Marta', 'Zielinska', 'Teacher', 'Mathematics educator focused on elegant problem solving.', 'Gdansk, PL', '1989-09-19', ''),
-      ('u-5', 'oliwia@example.com', 'Oliwia', 'Mazur', 'Personal', 'Course creator building practical programming paths.', 'Wroclaw, PL', '1998-04-06', ''),
-      ('u-6', 'piotr@example.com', 'Piotr', 'Lewandowski', 'Teacher', 'Science mentor translating lab topics into short modules.', 'Poznan, PL', '1985-12-03', ''),
-      ('u-7', 'elena@example.com', 'Elena', 'Wysocka', 'Personal', 'Language course author with a focus on speaking confidence.', 'Lodz, PL', '1996-01-27', ''),
-      ('u-8', 'artur@example.com', 'Artur', 'Kaminski', 'Personal', 'Data and design enthusiast building accessible visual courses.', 'Katowice, PL', '1994-06-15', ''),
-      ('u-9', 'magda@example.com', 'Magda', 'Sikora', 'Teacher', 'Humanities lecturer focused on social history and reading context.', 'Lublin, PL', '1987-11-21', ''),
-      ('u-10', 'tomasz@example.com', 'Tomasz', 'Baran', 'Personal', 'Humanities creator building compact literature and ethics paths.', 'Opole, PL', '1993-08-09', '');
-
-    INSERT OR IGNORE INTO courses (
-      id, title, description, author_user_id, category, level, publish_status, visibility, access_type,
-      price_cents, currency, country, is_trending, is_popular_pl, template_key
-    ) VALUES
-      ('math-logic-foundations', 'Mathematics: Logic Foundations', 'Short lessons on reasoning, implication, proof structure and common logic traps.', 'u-4', 'Mathematics', 'beginner', 'published', 'public', 'free', NULL, NULL, 'PL', 1, 1, 'mathematics'),
-      ('calculus-motion-patterns', 'Calculus for Motion Patterns', 'Limits, derivatives and motion-based intuition explained with compact examples.', 'u-4', 'Mathematics', 'intermediate', 'published', 'public', 'paid', 3499, 'PLN', 'PL', 0, 1, 'mathematics'),
-      ('python-loops-practice', 'Python Loops in Practice', 'From for-loops to nested iteration with small, realistic coding tasks.', 'u-5', 'Programming', 'beginner', 'published', 'public', 'free', NULL, NULL, 'PL', 1, 1, 'programming'),
-      ('frontend-grid-studio', 'Frontend Grid Studio', 'Responsive layouts, CSS grid thinking and visual rhythm for modern interfaces.', 'u-5', 'Programming', 'intermediate', 'published', 'public', 'free', NULL, NULL, 'PL', 1, 0, 'programming'),
-      ('cell-biology-lab', 'Cell Biology Lab Basics', 'Understand membranes, organelles and cell processes in concise science modules.', 'u-6', 'Science', 'beginner', 'published', 'public', 'free', NULL, NULL, 'PL', 1, 1, 'science'),
-      ('climate-systems-basics', 'Climate Systems Basics', 'Atmosphere, ocean circulation and feedback loops in a simple guided path.', 'u-6', 'Science', 'beginner', 'published', 'public', 'free', NULL, NULL, 'PL', 0, 1, 'science'),
-      ('spanish-travel-survival', 'Spanish Travel Survival Kit', 'Useful speaking patterns and travel vocabulary for real-life situations.', 'u-7', 'Language', 'beginner', 'published', 'public', 'paid', 1999, 'PLN', 'PL', 1, 0, 'language'),
-      ('data-viz-starter', 'Data Visualization Starter', 'Charts, storytelling and readable dashboards for beginners.', 'u-8', 'Programming', 'beginner', 'published', 'public', 'free', NULL, NULL, 'PL', 0, 1, 'classic'),
-      ('medieval-cities-europe', 'Medieval Cities of Europe', 'Trade, guilds, urban life and the growth of medieval civic culture.', 'u-9', 'History', 'beginner', 'published', 'public', 'free', NULL, NULL, 'PL', 1, 1, 'history'),
-      ('cold-war-decoded', 'Cold War Decoded', 'A compact guide to blocs, crises, diplomacy and everyday life under tension.', 'u-9', 'History', 'intermediate', 'published', 'public', 'free', NULL, NULL, 'PL', 1, 1, 'history'),
-      ('myth-symbols-classics', 'Myth and Symbols in the Classics', 'A reading companion for recurring symbols, archetypes and ancient motifs.', 'u-10', 'Humanities', 'beginner', 'published', 'public', 'paid', 2499, 'PLN', 'PL', 1, 0, 'art'),
-      ('ethics-everyday-decisions', 'Ethics in Everyday Decisions', 'Short scenarios that introduce moral reasoning without academic overload.', 'u-10', 'Humanities', 'beginner', 'published', 'public', 'free', NULL, NULL, 'PL', 0, 1, 'classic'),
-      ('reading-literature-closer', 'Reading Literature More Closely', 'Learn how to notice narrative voice, motifs and tension in short texts.', 'u-10', 'Humanities', 'beginner', 'published', 'public', 'free', NULL, NULL, 'PL', 1, 0, 'language');
-
-    INSERT OR IGNORE INTO course_stats (course_id, students, rating, reviews) VALUES
-      ('math-logic-foundations', 760, 4.8, 164),
-      ('calculus-motion-patterns', 340, 4.6, 71),
-      ('python-loops-practice', 1180, 4.9, 236),
-      ('frontend-grid-studio', 540, 4.7, 92),
-      ('cell-biology-lab', 690, 4.5, 103),
-      ('climate-systems-basics', 510, 4.4, 68),
-      ('spanish-travel-survival', 880, 4.7, 141),
-      ('data-viz-starter', 620, 4.6, 89),
-      ('medieval-cities-europe', 830, 4.8, 152),
-      ('cold-war-decoded', 910, 4.7, 181),
-      ('myth-symbols-classics', 470, 4.6, 77),
-      ('ethics-everyday-decisions', 560, 4.5, 84),
-      ('reading-literature-closer', 640, 4.7, 96);
-
-    INSERT OR IGNORE INTO lessons (id, course_id, title, duration_min, is_free_preview, position) VALUES
-      ('l-math-1', 'math-logic-foundations', 'Statements and truth values', 14, 1, 1),
-      ('l-math-2', 'math-logic-foundations', 'Implication and equivalence', 18, 0, 2),
-      ('l-calc-1', 'calculus-motion-patterns', 'Limits through motion', 16, 1, 1),
-      ('l-calc-2', 'calculus-motion-patterns', 'Derivatives and change', 21, 0, 2),
-      ('l-py-1', 'python-loops-practice', 'For loops and ranges', 12, 1, 1),
-      ('l-py-2', 'python-loops-practice', 'Nested loops and patterns', 19, 0, 2),
-      ('l-grid-1', 'frontend-grid-studio', 'Grid mental models', 13, 1, 1),
-      ('l-grid-2', 'frontend-grid-studio', 'Responsive placement', 20, 0, 2),
-      ('l-cell-1', 'cell-biology-lab', 'Cell structure essentials', 15, 1, 1),
-      ('l-cell-2', 'cell-biology-lab', 'Transport across membranes', 17, 0, 2),
-      ('l-climate-1', 'climate-systems-basics', 'Atmosphere layers', 11, 1, 1),
-      ('l-climate-2', 'climate-systems-basics', 'Global circulation', 16, 0, 2),
-      ('l-spanish-1', 'spanish-travel-survival', 'Greetings and directions', 10, 1, 1),
-      ('l-spanish-2', 'spanish-travel-survival', 'Hotel and restaurant phrases', 14, 0, 2),
-      ('l-viz-1', 'data-viz-starter', 'Choosing the right chart', 12, 1, 1),
-      ('l-viz-2', 'data-viz-starter', 'Visual hierarchy in dashboards', 18, 0, 2),
-      ('l-medieval-1', 'medieval-cities-europe', 'Markets and guild life', 15, 1, 1),
-      ('l-medieval-2', 'medieval-cities-europe', 'Walls, trade and power', 19, 0, 2),
-      ('l-coldwar-1', 'cold-war-decoded', 'Blocs and early tensions', 14, 1, 1),
-      ('l-coldwar-2', 'cold-war-decoded', 'Crisis and containment', 20, 0, 2),
-      ('l-myth-1', 'myth-symbols-classics', 'Recurring archetypes', 12, 1, 1),
-      ('l-myth-2', 'myth-symbols-classics', 'Symbolic patterns in epics', 18, 0, 2),
-      ('l-ethics-1', 'ethics-everyday-decisions', 'Moral dilemmas around us', 11, 1, 1),
-      ('l-ethics-2', 'ethics-everyday-decisions', 'Consequences and principles', 15, 0, 2),
-      ('l-reading-1', 'reading-literature-closer', 'Narrator and perspective', 10, 1, 1),
-      ('l-reading-2', 'reading-literature-closer', 'Motif and interpretation', 16, 0, 2);
-  `);
-
-  const profileBackfills = [
-    ['u-4', 'Mathematics mentor building clear problem-solving paths', 'Gdansk University of Technology', 'Mathematics Education', 'https://intelections.local/marta'],
-    ['u-5', 'Programming creator focused on practical beginner flows', 'Independent Creator', 'Frontend Development', 'https://intelections.local/oliwia'],
-    ['u-6', 'Science teacher turning lab topics into microlearning', 'Poznan University of Life Sciences', 'Biology Education', 'https://intelections.local/piotr'],
-    ['u-7', 'Language creator helping learners speak with confidence', 'Independent Creator', 'Applied Languages', 'https://intelections.local/elena'],
-    ['u-8', 'Visual storyteller for beginner-friendly data skills', 'Creative Data Studio', 'Data Visualization', 'https://intelections.local/artur'],
-    ['u-9', 'Historian connecting city life, politics and social change', 'Maria Curie-Sklodowska University', 'Modern and Social History', 'https://intelections.local/magda'],
-    ['u-10', 'Humanities creator focused on literature, ethics and careful reading', 'Independent Creator', 'Humanities and Interpretation', 'https://intelections.local/tomasz'],
-  ];
-
-  const updateUser = db.prepare(`
-    UPDATE users
-    SET headline = COALESCE(NULLIF(headline, ''), ?),
-        institution = COALESCE(NULLIF(institution, ''), ?),
-        specialization = COALESCE(NULLIF(specialization, ''), ?),
-        website = COALESCE(NULLIF(website, ''), ?)
-    WHERE id = ?
-  `);
-
-  for (const [userId, headline, institution, specialization, website] of profileBackfills) {
-    updateUser.run(headline, institution, specialization, website, userId);
-  }
 }
 
 function backfillLessonMaterialSortOrder(db) {
@@ -1115,13 +942,11 @@ export function openDatabase() {
 
   backfillPasswordHashes(db);
   seedIfEmpty(db);
-  backfillPasswordHashes(db);
   backfillAuthorProfiles(db);
   backfillLearningGroups(db);
   backfillAncientEgyptQuiz(db);
-  backfillClassicalGreeceMaterials(db);
+  backfillAncientEgyptMaterials(db);
   backfillDefenseDemoAccounts(db);
-  backfillDiscoverShowcase(db);
   backfillLessonMaterialSortOrder(db);
   backfillLegacyLooseMaterialSections(db);
   backfillCreatorSubscriptions(db);
